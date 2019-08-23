@@ -1,0 +1,45 @@
+{% extends "post/post_base.html" %}
+{% load humanize %}
+
+{% block pre_post_content %}
+<div class="col-md-4">
+	{% if request.user.is_authenticated %}
+	<div class="">
+		<div class="content">
+			<h5 class="title">Your Topic</h5>
+			<ul class="list-unstyled">
+				{# {% get_user_topic as user_topic %}#}
+				{% for member_topic in get_user_topic %}
+				<li class="group li-with-bullet">
+					<a href="{% url 'topic:single' slug=member_topic.topic.slug %}">{{ member_topic.topic.name }}</a>
+				</li>
+				{% endfor %}
+
+			</ul>
+		</div>
+	</div>
+	{% endif %}
+	<div class="">
+		<div class="content">
+			<h5 class="title">All Topics</h5>
+			<ul class="list-unstyled">
+				{# {% get_other_topics as other_topics %}#}
+				{% for other_topic in get_other_topic %}
+					<li class="group li-with-bullet"><a href="{% url 'topic:single' slug=other_topic.slug %}">{{ other_topic.name }}</a></li>
+				{% endfor %}
+			</ul>
+
+
+
+
+		</div>
+	</div>
+</div>
+{% endblock %}
+{% block post_content %}
+<div class="col-md-8">
+	{% for post in post_list %}
+  {% include "post/_post.html" %}
+	{% endfor %}
+</div>
+{% endblock %}
