@@ -1,0 +1,42 @@
+{% extends "topic/topic_base.html" %}
+
+{% block pretopic %}
+<div class="col-md-4">
+	<div class="content">
+		{% if user.is_authenticated %}
+		<h2>
+			Welcome back
+			<a href="{% url 'post:for_user' username=user.username %}">@{{user.username }}</a>
+		</h2>
+
+    {% endif %}
+			<h2>Topic Page</h2>
+
+	</div>
+	{% if user.is_authenticated %}
+	<a href="{% url 'topic:create' %}" class="btn btn-warning" role="button"><span class="fa fa-plus"></span> Create New topic!</a>
+	{% endif %}
+</div>
+{% endblock %}
+
+{% block topic_content %}
+<div class="col-md-8">
+	<div class="list-topic">
+		{% for topic in object_list %}
+		<a href="{% url 'topic:single' slug=topic.slug %}"
+		class="list-topic-item list-topic-item-action flex-column align-items-start">
+			<h3 class="mb-1">{{ topic.name }}</h3>
+			<p class="mb-1">{{ topic.description_html|safe }}</p>
+			<div class="d-flex w-40 justify-content-between">
+				<small class="text-muted"><span class="badge badge-secondary">
+					{{ topic.members.count }}</span> member{{ topic.members.count|pluralize }}</small>
+				<small class="text-muted"><span class="badge badge-secondary">
+					{{ topic.post.count }}</span> post{{ topic.post.count|pluralize }}</small>
+			<span></span><span></span>
+			</div>
+		</a>
+
+		{% endfor %}
+	</div>
+</div>
+{% endblock %}

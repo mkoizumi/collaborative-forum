@@ -1,0 +1,32 @@
+{% extends "topic/topic_base.html" %}
+
+{% block pretopic %}
+<div class="container">
+  <h1>{{topic.name}}</h1>
+
+  <div class="content">
+  	{% if user in topic.members.all %}
+  		<a href="{% url 'topic:leave' slug=topic.slug %}" class="btn btn-lg btn-warning"><span class="fa fa-times-circle-o"></span> Leave</a>
+  	{% else %}
+  		<a href="{% url 'topic:join' slug=topic.slug %}" class="btn btn-lg btn-warning"><span class="fa fa-check-circle-o"></span> Join</a>
+  	{% endif %}
+
+  </div>
+</div>
+{% endblock %}
+
+{% block topic_content %}
+
+<div class="col-md-8">
+	{% if topic.post.count == 0 %}
+	<h2>No post in this topic yet!</h2>
+
+	{% else %}
+
+		{% for post in topic.post.all %}
+			{% include "post/_post.html" %}
+		{% endfor %}
+
+	{% endif %}
+</div>
+{% endblock %}
