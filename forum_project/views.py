@@ -4,5 +4,6 @@ from django.views.generic import TemplateView
 class HomePage(TemplateView):
     template_name = 'index.html'  # homepage html
 
+# simple completed message page
 class LogoutPage(TemplateView):
     template_name = 'complete.html'
