@@ -1,7 +1,7 @@
 # Collaboratable-Forum
 
 * Author: Masa Koizumi
-* Start Date: February 2019
+* Start Date: July 2019
 
 ## Intro
 
