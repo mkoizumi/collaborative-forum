@@ -11,7 +11,7 @@ from django.contrib.auth import get_user_model
 
 # Create your views here.
 
-User = get_user_model()
+User = get_user_model(). # specific to this current user
 
 class PostList(SelectRelatedMixin, generic.ListView):
     model = models.Post
